@@ -9,16 +9,7 @@
          * @returns {boolean}
          */
         function inWishlist(selection) {
-            var inList = false;
-
-            _.forEach($scope.wishlist, function(car) {
-                if (car.make === selection.make && car.model === selection.model) {
-                    inList = true;
-                    return false; // break the loop
-                }
-            });
-
-            return inList;
+            return !!(_.find($scope.wishlist, selection));
         }
 
         /**
@@ -61,7 +52,7 @@
         $scope.add = function () {
             var newSelection;
 
-            if (!inWishlist($scope.selection)) {
+            if ($scope.selection && !inWishlist($scope.selection)) {
                 // Add car to wishlist
                 $scope.wishlist.push($scope.selection);
 
