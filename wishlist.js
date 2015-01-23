@@ -59,21 +59,16 @@
          * Add the current selection to the wishlist and remove it from the select dropdown
          */
         $scope.add = function () {
-            var newCars = [],
-                newSelection;
+            var newSelection;
 
             if (!inWishlist($scope.selection)) {
                 // Add car to wishlist
                 $scope.wishlist.push($scope.selection);
 
                 // Remove from dropdown by keeping all the cars except the selection
-                _.forEach($scope.cars, function (car) {
-                    if (car.make !== $scope.selection.make || car.model !== $scope.selection.model) {
-                        newCars.push(car);
-                    }
+                $scope.cars = _.filter($scope.cars, function (car) {
+                    return !!(car.make !== $scope.selection.make || car.model !== $scope.selection.model);
                 });
-
-                $scope.cars = newCars;
 
                 // Change the selection to the first car with the same make
                 // or the first car in the list (unless the list is empty)
