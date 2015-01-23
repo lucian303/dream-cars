@@ -30,14 +30,7 @@
          * @returns {Array|Boolean}
          */
         function getNewSelection(selection) {
-            var foundCar = false;
-
-            _.forEach($scope.cars, function (car, index) {
-                if (car.make === selection.make) {
-                    foundCar = $scope.cars[index];
-                    return false; // break the loop so we get the first alphabetical match
-                }
-            });
+            var foundCar = _.find($scope.cars, {make: selection.make});
 
             if (!foundCar && $scope.cars[0]) {
                 return $scope.cars[0];
