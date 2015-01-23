@@ -65,7 +65,7 @@
                 // Add car to wishlist
                 $scope.wishlist.push($scope.selection);
 
-                // Remove from dropdown by keeping all the cars except the selection
+                // Remove from dropdown
                 $scope.cars = _.filter($scope.cars, function (car) {
                     return !!(car.make !== $scope.selection.make || car.model !== $scope.selection.model);
                 });
@@ -84,20 +84,14 @@
          * @param car
          */
         $scope.remove = function (car) {
-            var newCars = [];
-
             // Add car back to dropdown and re-sort
             $scope.cars.push(car);
             $scope.cars = sortCars($scope.cars);
 
-            // Remove from wishlist by keeping all the cars but this one
-            _.forEach($scope.wishlist, function(value) {
-                if (car.make !== value.make || car.model !== value.model) {
-                    newCars.push(value);
-                }
+            // Remove from wishlist
+            $scope.wishlist = _.filter($scope.wishlist, function (value) {
+                return !!(car.make !== value.make || car.model !== value.model);
             });
-
-            $scope.wishlist = newCars;
         };
 
         /**
