@@ -48,6 +48,7 @@
             if ($scope.selection && !inWishlist($scope.selection)) {
                 // Add car to wishlist
                 $scope.wishlist.push($scope.selection);
+                $scope.wishlist = sortCars($scope.wishlist);
 
                 // Remove from dropdown
                 $scope.cars = _.filter($scope.cars, function (car) {
